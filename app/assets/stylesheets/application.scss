@@ -1,0 +1,128 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+ $link: #444;
+ $link-hover: #222;
+
+
+
+ @import "bulma";
+ @import "functions";
+
+ hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+ }
+ .notification {
+   border-radius: 0;
+ }
+ .navbar{
+   background: red;
+ }
+ .notification:not(:last-child) {
+   margin-bottom: 0;
+ }
+
+ .book-index-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+   .book {
+     border-left: 0;
+     border-top: 0;
+     position: relative;
+     min-height: 75px;
+
+     .title {
+       line-height: 1.6rem;
+     }
+     .price {
+       position: absolute;
+       bottom: 10px;
+       right: 10px;
+     }
+   }
+
+   .book-thumb {
+     position: relative;
+     max-height: 150px;
+     overflow: hidden;
+
+     img {
+       max-width: 100%;
+       width: 100%;
+       &:hover {
+         opacity: .9;
+       }
+     }
+
+     .condition {
+       position: absolute;
+       bottom: 10px;
+       right: 9px;
+     }
+   }
+ }
+ .bid{
+   font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #f44336;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+    position: relative;
+
+ }
+ .claim{
+   font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+    position: relative;
+
+ }
+ .myposts{
+   background-color: #f44336;
+   color: white;
+   padding: 14px 25px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+ }
+ .navbar{
+   border: 0px;
+   margin: 0px;
+   padding: 0px;
+
+ }
+ .is-danger{
+   height: 64px;
+   padding: 10px;
+ }

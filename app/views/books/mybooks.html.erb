@@ -1,0 +1,60 @@
+<% content_for :header do %>
+
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        All books issued to you
+      </h1>
+    </div>
+  </div>
+</section>
+<div class="book-index-grid pt4">
+  <% i=0 %>
+  <% @books.each do |book| %>
+   <% if book.issued_to_id == current_user.id %>
+    <div class="book border-light">
+      <div class="book-thumb">
+        <div id="myCarousel-<%= i %>" class="carousel slide" data-ride="carousel">
+
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+              <div class="item active">
+                <%= link_to image_tag(book.images[0]), book %>
+              </div>
+              <% (1...book.images.count).each do |image| %>
+              <div class="item">
+                  <%= link_to image_tag(book.thumbnail(image)), book%>
+              </div>
+              <% end %>
+
+
+
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel-<%= i %>" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel-<%= i %>" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span class="sr-only">Next</span>
+            </a>
+            <% i+=1 %>
+          </div>
+
+
+      </div>
+      <div class="pa3">
+           <h3 class="fw7 f4 title"><%= link_to book.title, book %></h3>
+           <p class="has-text-gray fg pt1"> Author: <%= book.author if book.author%></p>
+          <%= link_to 'Return', return_book_path(book), class: "button is-small", method: :patch %>
+
+    </div>
+  </div>
+  <% end %>
+<% end %>
+</div>
+  <% end %>
