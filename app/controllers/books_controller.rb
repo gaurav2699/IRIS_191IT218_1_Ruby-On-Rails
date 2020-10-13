@@ -80,7 +80,6 @@ class BooksController < ApplicationController
       @transaction.update_attribute(:requested_by_id, current_user.id )
       @transaction.update_attribute(:requested, true)
       @transaction.update_attribute(:status, 3)
-      @transaction.update_attribute(:issue_date, Date.today)
       redirect_to @book, notice: "Book issue request is successfully placed"
      else
       redirect_to books_url, notice: "You have already requested this book"
@@ -113,6 +112,7 @@ def update_status_approved
   @book=Book.find(@transaction.book_id)
   @transaction.update_attribute(:issued_to, @transaction.requested_by )
   @transaction.update_attribute(:issued_to_id, @transaction.requested_by_id )
+  @transaction.update_attribute(:issue_date, Date.today)
   @transaction.update_attribute(:status, 1)
   @book.update_attribute(:quantity, @book.quantity-1)
   redirect_to @book, notice: "Book approved to the student"
@@ -133,6 +133,14 @@ def return
   @transaction.update_attribute(:return_date, Date.today)
   @book.update_attribute(:quantity, @book.quantity+1)
   redirect_to @book, notice: "Book is returned"
+end
+
+def mytransactions
+  @books=Book.all
+end
+
+def transactions
+  @books=Book.all
 end
 
   private

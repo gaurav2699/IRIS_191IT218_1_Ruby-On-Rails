@@ -1,0 +1,52 @@
+<% content_for :header do %>
+
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        All Transactions
+      </h1>
+    </div>
+  </div>
+</section>
+<div class="book-index-grid-t pt4">
+  <% i=0 %>
+  <table>
+    <tr>
+      <th> Student Name</th>
+      <th> Title</th>
+      <th> Author</th>
+      <th> Issue Date</th>
+        <th> Return Date</th>
+        <th> Duration </th>
+      </tr>
+  <% $transactions.each do |transaction| %>
+   <%if transaction.returned==true%>
+   <% @book=Book.find(transaction.book_id)%>
+      <tr>
+        <td>
+          <p class="has-text-gray fg pt1">  <%= transaction.issued_to%></p>
+        </td>
+        <td>
+          <h3 class="fw7 f4 title"><%= link_to @book.title, @book %></h3>
+          </td>
+          <td>
+            <p class="has-text-gray fg pt1"> <%= @book.author if @book.author%></p>
+          </td>
+          <td>
+            <p class="has-text-gray fg pt1">  <%= transaction.issue_date%></p>
+          </td>
+          <td>
+            <p class="has-text-gray fg pt1"><%= transaction.return_date%></p>
+          </td>
+          <td>
+            <p class="has-text-gray fg pt1"> <%= transaction.return_date - transaction.issue_date%> days</p>
+          </td>
+        </tr>
+
+
+  <% end %>
+<% end %>
+</table>
+
+  <% end %>

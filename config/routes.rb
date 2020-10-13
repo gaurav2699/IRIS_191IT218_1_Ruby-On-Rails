@@ -18,5 +18,7 @@ registrations: 'registrations'
   match 'books/:id/myrequests'=>'books#myrequests',:as => :myrequests, via: :get
   match 'books/:id/approved'=>'books#approved',:as => :approved, via: :get
   match 'books/:id/rejected'=>'books#rejected',:as => :rejected, via: :get
+  match 'books/:id/mytransactions'=>'books#mytransactions',:as => :mytransactions, via: :get
+  match 'books/:id/transactions'=>'books#transactions',:as => :transactions, via: :get
   root to: 'books#index'
 end

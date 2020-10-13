@@ -56,8 +56,10 @@
           <p class="has-text-gray fg pt1">&nbsp; &nbsp; Qty: <%= @book.quantity%></p><br>
           <% if transaction.status==3 %>
             <p class="has-text-gray fg pt1">Status: Pending</p>
-          <% elsif transaction.status==1 %>
-              <p class="has-text-gray fg pt1">Status: Approved</p>
+          <% elsif transaction.status==1 and transaction.returned ==false %>
+              <p class="has-text-gray fg pt1">Status: Approved(Not Returned)</p>
+          <% elsif transaction.status==1 and transaction.returned ==true %>
+              <p class="has-text-gray fg pt1">Status: Approved(Returned)</p>
           <% elsif transaction.status==2 %>
                 <p class="has-text-gray fg pt1">Status: Rejected</p>
           <% end %>

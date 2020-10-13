@@ -8,9 +8,11 @@
       </h1>
       <% if current_user.id==$users.first.id %>
           <%= link_to 'Issue Requests', requests_path(@books), class: "myposts" %>
+          <%= link_to 'All Transaction', transactions_path(@books), class: "myposts" %>
       <% else %>
         <%= link_to 'My Books', mybooks_path(@books), class: "myposts" %>
         <%= link_to 'My Requests', myrequests_path(@books), class: "myposts" %>
+        <%= link_to 'My Transactions', mytransactions_path(@books), class: "myposts" %>
       <% end %>
     </div>
   </div>
