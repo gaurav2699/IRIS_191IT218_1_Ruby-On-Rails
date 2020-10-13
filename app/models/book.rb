@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
   has_many_attached :images
   belongs_to :user
-  has_many :transactions
+  has_many :transactions, :dependent => :destroy
   validates :title, presence: true
   validates :isbn, presence: true
   validates :quantity, presence: true
