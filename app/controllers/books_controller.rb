@@ -7,6 +7,7 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     $users = User.all
+    $transactions= Transaction.all
   end
 
   # GET /books/1
@@ -65,13 +66,22 @@ class BooksController < ApplicationController
 
 
   def update_requested_by
-    @book=Book.find(params[:id])
-    if @book.requested_by_id != current_user.id
-      @book.update_attribute(:requested_by, current_user.name )
-      @book.update_attribute(:requested_by_id, current_user.id )
-      @book.update_attribute(:requested, true)
+     @book=Book.find(params[:id])
+     k=0
+     $transactions.each do |transaction|
+       if transaction.requested_by_id==current_user.id and transaction.book_id==@book.id and (transaction.status==3 or (transaction.status==1 and transaction.returned=false))
+         k=1
+       end
+     end
+     @transaction=Transaction.new
+    if k==0
+      @transaction.update_attribute(:book_id, @book.id)
+      @transaction.update_attribute(:requested_by, current_user.name )
+      @transaction.update_attribute(:requested_by_id, current_user.id )
+      @transaction.update_attribute(:requested, true)
+      @transaction.update_attribute(:status, 3)
+      @transaction.update_attribute(:issue_date, Date.today)
       redirect_to @book, notice: "Book issue request is successfully placed"
-
      else
       redirect_to books_url, notice: "You have already requested this book"
      end
@@ -99,33 +109,28 @@ def rejected
 end
 
 def update_status_approved
-  @book=Book.find(params[:id])
-  @book.update_attribute(:issued_to, @book.requested_by )
-  @book.update_attribute(:issued_to_id, @book.requested_by_id )
-  @book.update_attribute(:requested_by, "" )
-  @book.update_attribute(:requested_by_id, -1 )
-  @book.update_attribute(:requested, false)
-  @book.update_attribute(:status, 1)
+  @transaction=Transaction.find(params[:id])
+  @book=Book.find(@transaction.book_id)
+  @transaction.update_attribute(:issued_to, @transaction.requested_by )
+  @transaction.update_attribute(:issued_to_id, @transaction.requested_by_id )
+  @transaction.update_attribute(:status, 1)
   @book.update_attribute(:quantity, @book.quantity-1)
   redirect_to @book, notice: "Book approved to the student"
 end
 
 
 def update_status_rejected
-  @book=Book.find(params[:id])
-  @book.update_attribute(:requested_by, "" )
-  @book.update_attribute(:requested_by_id, -1 )
-  @book.update_attribute(:requested, false)
-  @book.update_attribute(:status, 2)
+  @transaction=Transaction.find(params[:id])
+  @book=Book.find(@transaction.book_id)
+  @transaction.update_attribute(:status, 2)
   redirect_to @book, notice: "Book request is rejected"
 end
 
 def return
-  @book=Book.find(params[:id])
-  @book.update_attribute(:status, -1)
-  @book=Book.find(params[:id])
-  @book.update_attribute(:issued_to, "" )
-  @book.update_attribute(:issued_to_id, -1 )
+  @transaction=Transaction.find(params[:id])
+  @book=Book.find(@transaction.book_id)
+  @transaction.update_attribute(:returned, true)
+  @transaction.update_attribute(:return_date, Date.today)
   @book.update_attribute(:quantity, @book.quantity+1)
   redirect_to @book, notice: "Book is returned"
 end
@@ -138,6 +143,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :author, :description, :quantity, :isbn, :requested, :requested_by, :requested_by_id, :status, :issued_to, :issued_to_id, images: [])
+      params.require(:book).permit(:title, :author, :description, :quantity, :isbn, images: [])
     end
 end
