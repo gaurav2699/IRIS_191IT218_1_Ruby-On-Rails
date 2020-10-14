@@ -9,6 +9,7 @@
     </div>
   </div>
 </section>
+
 <div class="book-index-grid-t pt4">
   <% i=0 %>
   <table>
@@ -28,7 +29,7 @@
           <p class="has-text-gray fg pt1">  <%= transaction.issued_to%></p>
         </td>
         <td>
-          <h3 class="fw7 f4 title"><%= link_to @book.title, @book %></h3>
+          <h3 class="fw7 f4 title"><%= link_to transaction.book.title, @book %></h3>
           </td>
           <td>
             <p class="has-text-gray fg pt1"> <%= @book.author if @book.author%></p>
@@ -40,7 +41,7 @@
             <p class="has-text-gray fg pt1"><%= transaction.return_date%></p>
           </td>
           <td>
-            <p class="has-text-gray fg pt1"> <%= transaction.return_date - transaction.issue_date%> days</p>
+            <p class="has-text-gray fg pt1"> <%= (transaction.return_date - transaction.issue_date).to_i%> day(s)</p>
           </td>
         </tr>
 
@@ -48,5 +49,7 @@
   <% end %>
 <% end %>
 </table>
-
+<div class="btn">
+<i class="fa fa-download"></i> <%= link_to 'Download CSV transaction list', transactions_path(format: :csv)%>
+</div>
   <% end %>

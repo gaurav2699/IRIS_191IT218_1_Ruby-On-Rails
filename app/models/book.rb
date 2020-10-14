@@ -10,6 +10,8 @@ class Book < ApplicationRecord
     return self.images[input].variant(resize: '300x300').processed
   end
 
+
+
   private
   def image_type
     if images.attached? == false

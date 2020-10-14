@@ -141,6 +141,13 @@ end
 
 def transactions
   @books=Book.all
+  respond_to do |format|
+    format.html
+    format.csv do
+     headers['Content-Disposition'] = "attachment; filename=\"transactions.csv\""
+     headers['Content-Type'] ||= 'text/csv'
+    end
+  end
 end
 
   private
