@@ -4,6 +4,8 @@ class BooksController < ApplicationController
 
   # GET /books
   # GET /books.json
+  # gets list of all the books and users and transactions
+  # Request: GET
   def index
     @books = Book.all
     $users = User.all
@@ -16,6 +18,8 @@ class BooksController < ApplicationController
   end
 
   # GET /books/new
+  # creates a new book
+  # Request: GET
   def new
     @book = Book.new
   end
@@ -26,6 +30,8 @@ class BooksController < ApplicationController
 
   # POST /books
   # POST /books.json
+  #Creates new book
+  # Request: POST
   def create
     @book = Book.new(book_params)
     @book.user = current_user
@@ -42,6 +48,8 @@ class BooksController < ApplicationController
 
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
+  # Updates the table books.
+  # Request: PATCH/PUT
   def update
     respond_to do |format|
       if @book.update(book_params)
@@ -56,6 +64,8 @@ class BooksController < ApplicationController
 
   # DELETE /books/1
   # DELETE /books/1.json
+  # Deletes the posts
+  # Request: DELETE
   def destroy
     @book.destroy
     respond_to do |format|
@@ -64,7 +74,8 @@ class BooksController < ApplicationController
     end
   end
 
-
+  # Places requests and creates a new transactions row and updates the columns
+  # Request: PATCH
   def update_requested_by
      @book=Book.find(params[:id])
      k=0
@@ -86,7 +97,8 @@ class BooksController < ApplicationController
      end
   end
 
-
+# fetches all the books from the book table
+# Request: GET
   def mybooks
    @books = Book.all
  end
@@ -107,6 +119,8 @@ def rejected
  @books = Book.all
 end
 
+# Once the librarian approves the book, the columns in the transactions table gets updated to contain that information
+# Request: PATCH
 def update_status_approved
   @transaction=Transaction.find(params[:id])
   @book=Book.find(@transaction.book_id)
@@ -118,7 +132,8 @@ def update_status_approved
   redirect_to @book, notice: "Book approved to the student"
 end
 
-
+# Once the librarian rejects the book, the columns in the transactions table gets updated to contain that information
+# Request: PATCH
 def update_status_rejected
   @transaction=Transaction.find(params[:id])
   @book=Book.find(@transaction.book_id)
@@ -126,6 +141,8 @@ def update_status_rejected
   redirect_to @book, notice: "Book request is rejected"
 end
 
+# When the students returns the book, the returned column becomes true
+# Request: PATCH
 def return
   @transaction=Transaction.find(params[:id])
   @book=Book.find(@transaction.book_id)
@@ -135,10 +152,12 @@ def return
   redirect_to @book, notice: "Book is returned"
 end
 
+
 def mytransactions
   @books=Book.all
 end
 
+# When the download csv is clicked, it generates the transaction.csv file
 def transactions
   @books=Book.all
   respond_to do |format|

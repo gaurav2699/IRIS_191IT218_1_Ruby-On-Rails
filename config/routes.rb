@@ -13,6 +13,7 @@ registrations: 'registrations'
  }
   resources :books
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # setting routes for each button created.
   match 'books/:id/mybooks'=>'books#mybooks',:as => :mybooks, via: :get
   match 'books/:id/requests'=>'books#requests',:as => :requests, via: :get
   match 'books/:id/myrequests'=>'books#myrequests',:as => :myrequests, via: :get

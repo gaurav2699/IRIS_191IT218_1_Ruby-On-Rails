@@ -1,5 +1,5 @@
 <%- headers = ['Student Name', 'Book Title', 'Issue Date', 'Return Date', 'Duration(in days)'] -%>
 <%= CSV.generate_line headers %>
 <%- $transactions.each do |transaction| -%>
-<%= CSV.generate_line([transaction.issued_to, transaction.book.title, transaction.issue_date, transaction.return_date, (transaction.return_date-transaction.issue_date).to_i]) -%>
+  <%= CSV.generate_line([transaction.issued_to, transaction.book.title, transaction.issue_date, transaction.return_date, (transaction.return_date-transaction.issue_date).to_i]) -%>
 <%- end -%>
