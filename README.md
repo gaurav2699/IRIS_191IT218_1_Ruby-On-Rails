@@ -8,8 +8,9 @@ Ruby Version: ruby 2.6.1
 - gem 'mini_magick', '~> 4.8'
 # Complete steps to run the project
 1. First clone the repository to your desired location
-2. Install imagemagick (sudo apt-get install imagemagick)
-2. Run the following commands in you teminal:
+2. Go to config/database.yml and change the username and password to your respective MySQL username and password
+3. Install imagemagick (sudo apt-get install imagemagick)
+4. Run the following commands in you teminal:
 ```
 bundle install
 rake db:create
