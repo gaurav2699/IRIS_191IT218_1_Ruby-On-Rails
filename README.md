@@ -47,4 +47,3 @@ rails server
 - No known bugs
 # References used
 - IRIS ROR bootcamp
-- https://web-crunch.com/posts/ruby-on-rails-ecommerce-music-shop
