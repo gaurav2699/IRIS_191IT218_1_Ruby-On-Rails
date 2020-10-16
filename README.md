@@ -1,7 +1,7 @@
 Ruby Version: ruby 2.6.1
 # Necessary installation steps
 - To install Ruby on Rails, go through the following document
-- https://docs.google.com/document/d/1jW8vD1ziBLZ-ClZ4tpp7PPxH3obzI3Vk3LCAEBQkzkk/edit?usp=sharing
+  https://docs.google.com/document/d/1jW8vD1ziBLZ-ClZ4tpp7PPxH3obzI3Vk3LCAEBQkzkk/edit?usp=sharing
 #### Add the following additional gems to the file Gemfile
 - gem 'devise'
 - gem 'bulma-rails', '~> 0.6.1'
