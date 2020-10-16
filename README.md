@@ -8,7 +8,7 @@ Ruby Version: ruby 2.6.1
 - gem 'mini_magick', '~> 4.8'
 # Complete steps to run the project
 1. First clone the repository to your desired location
-2. Intall imagemagick (sudo apt-get install imagemagick)
+2. Install imagemagick (sudo apt-get install imagemagick)
 2. Run the following commands in you teminal:
 ```
 bundle install
